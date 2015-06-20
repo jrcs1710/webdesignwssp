@@ -1,0 +1,25 @@
+.containner {
+	max-width:1300px;
+	margin: 0 auto;	
+}
+.nav {	
+	font-size:1.2em;	
+}
+img,figure {	
+	max-width: 100%;	
+}
+figcaption {
+	text-align:center;
+	background-color:#000000;
+	color:#9d9d9d;
+	height: 25px;
+	line-height: 25px;
+}
+.nav navbar-nav a{
+	color:red;
+}
+.footer {
+	margin-top: 20px;
+	background-color: #000;
+	
+}		
