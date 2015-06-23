@@ -1,42 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Título do Site</title>
-<link href="resources/bootstrap-3.3.5-dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<link href="resources/css/estilo.css" rel="stylesheet">
-<link href="resources/icomoon/icomoon.css" rel="stylesheet">
-<link href="resources/css/image_effect.css" rel="stylesheet">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="resources/jquery/jquery-2.1.4.min.js"></script>
-<script src="resources/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
-</head>
-<body>
-	<div class="containner">
-		<header class="page-header">
-			<img class="logo" alt="Logomarca empresa"
-				src="resources/imagens/logo.png">
-		</header>
-		<nav class="navbar navbar-inverse"
-			style="background-color: #000; border: 0px;">
-			<div class="container-fluid">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<c:import url="/WEB-INF/views/template/cabecalho.jsp" />
 
-				<ul class="nav navbar-nav">
-					<li><a href="#">Home</a></li>
-					<li><a href="#">Empresa</a></li>
-					<li><a href="#">Produtos</a></li>
-					<li><a href="#">Localização</a></li>
-					<li><a href="#">Galeria</a></li>
-				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#"><span class="icon icon-facebook2"></span></a></li>
-					<li><a href="#"><span class="icon icon-instagram"></span></a></li>
-					<li><a href="#"><span class="icon icon-twitter2"></span></a></li>
-				</ul>
-
-			</div>
-		</nav>
 		<div id="myCarousel" class="carousel slide" data-ride=carousel>
 			<ol class="carousel-indicators">
 				<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -79,13 +46,13 @@
 				<figure>
 					<a href="#"> <img src="resources/imagens/coluna.png">
 					</a>
-					<figcaption>A empresa</figcaption>
+					<figcaption>Empresa</figcaption>
 				</figure>
 			</div>
 			<div class="col-sm-4">
 				<figure>
 					<img src="resources/imagens/coluna.png">
-					<figcaption>Localização</figcaption>
+					<figcaption>Produtos</figcaption>
 				</figure>
 			</div>
 
@@ -124,30 +91,4 @@
 			</div>
 
 		</div>
-		<footer class="footer">
-			<div class="row">
-				<div class="col-md-3">
-
-					<h4>Home</h4>
-					<h4>Empresa</h4>
-					<h4>Produtos</h4>
-					<h4>Localização</h4>
-					<h4>Galeria</h4>
-
-				</div>
-				<div class="col-md-6"></div>
-				<div class="col-md-3">
-					<h4>Contatos</h4>
-
-					<h4><span class="icon icon-phone"></span>&nbsp;(11) 3273-5014</h4>
-					<h4><span class="icon icon-mail3"></span>&nbsp;<a href="mailto:jsilva@sp.senai.br">jsilva@sp.senai.br</a></h4>			
-				</div>
-			</div>
-			<div id="foot">
-				<h5>WebDesign World Skills São Paulo 2015</h5>
-			</div>
-		</footer>
-	</div>
-
-</body>
-</html>
+<c:import url="/WEB-INF/views/template/rodape.jsp" />
