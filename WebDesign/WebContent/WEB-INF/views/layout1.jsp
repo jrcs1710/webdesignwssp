@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<c:import url="/WEB-INF/views/template/cabecalho.jsp" />
+<c:import url="/WEB-INF/views/template/layout1/cabecalho.jsp" />
 
 		<div id="myCarousel" class="carousel slide" data-ride=carousel>
 			<ol class="carousel-indicators">
@@ -48,14 +48,14 @@
 					</a>
 					<figcaption>Empresa</figcaption>
 				</figure>
-			</div>
+			</div>			
 			<div class="col-sm-4">
 				<figure>
 					<img src="resources/imagens/coluna.png">
 					<figcaption>Produtos</figcaption>
 				</figure>
 			</div>
-
+	
 			<div class="col-sm-4">
 				<figure>
 					<img src="resources/imagens/coluna.png">
@@ -91,4 +91,4 @@
 			</div>
 
 		</div>
-<c:import url="/WEB-INF/views/template/rodape.jsp" />
+<c:import url="/WEB-INF/views/template/layout1/rodape.jsp" />

@@ -9,8 +9,8 @@
 	type="text/javascript"></script>
 <div class="col-md-3">
 	<ul class="nav nav-pills nav-stacked">
-		<li class="active"><a href="#">Layout</a></li>
-		<li><a href="#">Cabeçalho</a></li>
+		<li class="active"><a href="novo">Layout</a></li>
+		<li><a href="menu">Menu</a></li>
 		<li><a href="#">Slider</a></li>
 		<li><a href="#">Página inicial</a></li>
 		<li><a href="#">Produtos</a></li>
@@ -44,11 +44,11 @@
 					<label><input type="radio" required="required" name="layout" value="1">Opção
 						1</label>
 				</div>
-			</div>			
+			</div>					
 			<div class="col-sm-4">
 				<div class="radio">
 					<img style="border: 1px solid"
-						src=<c:url value="resources/imagens/layout_1.png"/>> <br />
+						src=<c:url value="resources/imagens/layout_2.png"/>> <br />
 					<label><input type="radio" required="required" name="layout" value="2">Opção
 						2</label>
 				</div>
