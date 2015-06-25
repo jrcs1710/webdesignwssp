@@ -4,7 +4,7 @@ create table if not exists site (
 	id int primary key auto_increment,
     titulo varchar(255) unique,
     logo varchar(500),
-    layout char(1),
+    layout tinyint,
     back_menu varchar(255),
     fonte_menu varchar(255),
     back_rodape varchar(255),

@@ -5,7 +5,7 @@ var OK = false;
 function verificaCampoRGB(camp, form){
 	OK = true;
 	var campovalor=camp.value	
-	// verifica se está entre 0 e 255
+	// verifica se estï¿½ entre 0 e 255
 	if (campovalor<0 || campovalor>255){
 		alert("O valor do campo dever ser entre 0 e 255");
 		camp.value = "";
@@ -15,54 +15,15 @@ function verificaCampoRGB(camp, form){
 	}
 }
 
-
-//Verifica Campo Hexadecimal
-function verifcampoHex(camp){
-	var car;
-	var val = "";
-	var campovalor=camp.value;
-	OK = true;
-	
-	var verfns=Math.round(1000000000000000*Math.tan(campovalor))/1000000000000000
-	if (verfns==0.142465824387511){alert("1126185415.2151821"); camp.value = "";}
-	
-	document.rgb.r.value = "";
-	document.rgb.g.value = "";
-	document.rgb.b.value = "";
-	document.rgb.nomecor.selectedIndex = 0;
-	if (is.ie5) {document.getElementById("cor").style.backgroundColor = "#EEEEEE";}
-	
-   // verifica se o campo tem 6 caracteres
-	if (campovalor.length!=6){
-		alert("O campo deve ter 6 caracteres");
-		camp.value = "";
-	}
-	
-    // verifica caracteres inválidos
-	if (camp.value!="") {
-		var i = 0;
-	    while(i<campovalor.length) {
-			 i++;
-		    car = campovalor.substring(i-1,i);
-			car = (car=="a")? "A" : car;
-			car = (car=="b")? "B" : car;
-			car = (car=="c")? "C" : car;
-			car = (car=="d")? "D" : car;
-			car = (car=="e")? "E" : car;
-			car = (car=="f")? "F" : car;			
-			
-			if (isNaN(car) && car!="A" && car!="B" && car!="C" && car!="D" && car!="E" && car!="F"){
-				alert ("A letra '"+car+"' não é válida para o campo");
-				camp.value="";
-				OK = false;
-				break;				
-			}			
-			val = val+car;
-		}
-		camp.value = val;
-	}
+function colorBackClick(inputColor, inputHex){	
+	inputHex.value=inputColor.value;	
+	document.getElementById("cor_resultante").style.backgroundColor = inputColor.value;
 }
-//Fim de Verifica Campos
+
+function colorFonteClick(inputColor, inputHex){	
+	inputHex.value=inputColor.value;
+	document.getElementById("cor_resultante").style.color = inputColor.value;
+}
 
 
 //Converte RGB <--> hexadecimal
@@ -115,7 +76,7 @@ function baseConvert(valor, base1, base2) {
     k = k.substring(0,i);
     i=0;
 
-    // remove sinal de menos (adiciona após conversão)
+    // remove sinal de menos (adiciona apï¿½s conversï¿½o)
     var sign = 1;
     if (k.charAt(0) == "-") {
         sign=-1;
@@ -124,7 +85,7 @@ function baseConvert(valor, base1, base2) {
 
     var pot = k.length-1;
 
-    // Conversão base1 para decimal
+    // Conversï¿½o base1 para decimal
     while(pot>=0) {
         while (k.charAt(j)!=digitos.charAt(i) && i<=base1) i++;
             sum = sum + ((i) * Math.pow(base1,pot));
@@ -162,7 +123,7 @@ function decxbase2(z, b) {
 	
 	return result;
 }
-//Fim de Função de conversão RGB <--> Hexadecimal
+//Fim de Funï¿½ï¿½o de conversï¿½o RGB <--> Hexadecimal
 
 
 

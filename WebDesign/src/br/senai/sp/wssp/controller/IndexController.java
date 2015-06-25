@@ -1,5 +1,7 @@
 package br.senai.sp.wssp.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,13 +16,13 @@ public class IndexController {
 	private SiteDao dao;
 
 	@RequestMapping("index")
-	public String index(String titulo, Model model) {
+	public String index(String titulo, Model model, HttpSession session) {
 		Site site = dao.buscar(titulo);
-		model.addAttribute("site", site);
-		if (site.getLayout() == '1') {
-			return "layout1";
+		session.setAttribute("site", site);
+		if (site != null && site.getLayout() == '2') {
+			return "layout2/index";
 		} else {
-			return "layout2";
+			return "layout1/index";
 		}
 	}
 }

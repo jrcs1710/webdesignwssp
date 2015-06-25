@@ -1,3 +1,7 @@
+html{
+	position: relative;
+	min-height: 100%;
+}
 .containner {
 	max-width:1300px;
 	margin: 0 auto;	
@@ -21,7 +25,7 @@ figcaption {
 .footer {
 	margin-top: 20px;
 	background-color: #000;	
-	padding-top:10px;	
+	padding-top:10px;		
 }		
 .destaque {
 	margin-left:0px;
@@ -63,11 +67,22 @@ footer h4 {
 	color:#9d9d9d;		
 	display: block;
 }
-#foot {
+#foot_admin {
 	color:#000;
 	text-align: center;
 	background: #fff;
 	width: 100%;
+	padding-top: 5px;
+	position: absolute;
+	bottom: 0;
+	max-width: 1330px;
+	margin-left: auto;
+	margin-right: auto;
+}
+#foot {
+	color:#000;
+	text-align: center;
+	background: #fff;
 	padding-top: 5px;
 }
 .input_number {
@@ -75,4 +90,9 @@ footer h4 {
 }
 .form-group {
 	text-align: center;
+}
+#cor_resultante {
+	border-radius:15px;
+	border: 1px solid #000;
+	
 }

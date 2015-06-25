@@ -19,5 +19,10 @@ public class AdminController {
 	public String menu() {
 		return "admin/menu";
 	}
+	
+	@RequestMapping("slide")
+	public String slide() {
+		return "admin/slide";
+	}
 
 }

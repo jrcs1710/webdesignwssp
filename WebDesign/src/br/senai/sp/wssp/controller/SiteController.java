@@ -3,14 +3,10 @@ package br.senai.sp.wssp.controller;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 
-import org.apache.tomcat.util.net.URL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +23,8 @@ public class SiteController implements ServletContextAware {
 	private SiteDao dao;
 
 	@RequestMapping("criarSite")
-	public String criarSite(Site site, MultipartFile fileLogo) {
+	public String criarSite(Site site, MultipartFile fileLogo, HttpSession session) {		
+		int idSite;
 		String path = "/imagens/" + site.getTitulo();
 		try {
 			File pasta = new File(servletContext.getRealPath(path));
@@ -36,7 +33,13 @@ public class SiteController implements ServletContextAware {
 			}
 			path = path + "/logo_" + site.getTitulo() + ".jpg";
 			site.setLogo(path);
-			dao.criarSite(site);
+			if (site.getId() == 0) {
+				idSite = dao.criarSite(site);	
+				site.setId(idSite);
+			}else{
+				
+			}
+			
 			if (!fileLogo.isEmpty()) {
 				byte[] bytes = fileLogo.getBytes();
 				BufferedOutputStream stream = new BufferedOutputStream(
@@ -48,8 +51,21 @@ public class SiteController implements ServletContextAware {
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
-		return null;
+		
+		session.setAttribute("siteAdmin", site);
+		return "forward:menu";
 	}
+		
+	@RequestMapping("criarMenu")
+	public String criarMenu(String backColor, String fontColor, int id, HttpSession session){
+		dao.atualizaMenu(id, backColor, fontColor);
+		Site siteAdmin = (Site)session.getAttribute("siteAdmin");
+		siteAdmin.setBack_menu(backColor);
+		siteAdmin.setFonte_menu(fontColor);
+		session.setAttribute("siteAdmin", siteAdmin);
+		return "forward:slide";
+	}
+	
 
 	@Override
 	public void setServletContext(ServletContext context) {

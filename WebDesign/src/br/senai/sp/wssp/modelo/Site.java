@@ -6,7 +6,7 @@ public class Site {
 	private int id;
 	private String titulo;
 	private String logo;
-	private char layout;
+	private Byte layout;
 	private String back_menu;
 	private String fonte_menu;
 	private String back_rodape;
@@ -47,11 +47,11 @@ public class Site {
 		this.logo = logo;
 	}
 
-	public char getLayout() {
+	public Byte getLayout() {
 		return layout;
 	}
 
-	public void setLayout(char layout) {
+	public void setLayout(Byte layout) {
 		this.layout = layout;
 	}
 

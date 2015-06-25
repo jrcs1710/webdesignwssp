@@ -19,8 +19,15 @@
 <script src=<c:url value="resources/jquery/jquery-2.1.4.min.js"/>></script>
 <script
 	src=<c:url value="resources/bootstrap-3.3.5-dist/js/bootstrap.min.js"/>></script>
+<style>
+.navbar-inverse .navbar-nav li a {
+	color: ${site.fonte_menu};
+}
+</style>
 </head>
+
 <body>
+
 	<div class="containner">
 		<header class="page-header">
 			<c:choose>
@@ -34,8 +41,9 @@
 				</c:otherwise>
 			</c:choose>
 		</header>
+
 		<nav class="navbar navbar-inverse"
-			style="background-color: #000; border: 0px;">
+			style="background-color:${site.back_menu}; border: 0px;">
 			<div class="container-fluid">
 
 				<ul class="nav navbar-nav">
@@ -44,6 +52,7 @@
 					<li><a href="#">Produtos</a></li>
 					<li><a href="#">Localização</a></li>
 					<li><a href="#">Galeria</a></li>
+
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="#"><span class="icon icon-facebook2"></span></a></li>

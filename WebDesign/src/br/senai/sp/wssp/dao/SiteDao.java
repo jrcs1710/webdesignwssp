@@ -3,8 +3,10 @@ package br.senai.sp.wssp.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 
+import javax.management.RuntimeErrorException;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,13 +29,34 @@ public class SiteDao {
 		}
 	}
 	
-	public void criarSite(Site site){
+	public int criarSite(Site site){
+		int retorno = -1;
 		String sql = "INSERT INTO site(titulo,layout,logo) VALUES (?,?,?)";
 		try {
-			PreparedStatement stmt = conexao.prepareStatement(sql);
+			PreparedStatement stmt = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, site.getTitulo());
-			stmt.setString(2, String.valueOf(site.getLayout()));
+			stmt.setByte(2, site.getLayout());
 			stmt.setString(3, site.getLogo());
+			stmt.execute();
+			ResultSet keys = stmt.getGeneratedKeys();
+			if (keys.next()) {
+				retorno = keys.getInt(1);
+			}
+			keys.close();
+			stmt.close();
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+		return retorno;
+	}
+	
+	public void atualizaMenu(int id, String backColor, String fontColor){
+		String sql = "UPDATE site SET back_menu = ?, fonte_menu = ? WHERE id = ?";
+		try {
+			PreparedStatement stmt = conexao.prepareStatement(sql);
+			stmt.setString(1, backColor);
+			stmt.setString(2, fontColor);
+			stmt.setInt(3, id);
 			stmt.execute();
 			stmt.close();
 		} catch (Exception e) {
@@ -51,7 +74,7 @@ public class SiteDao {
 			if (rs.next()) {
 				site = new Site();
 				site.setTitulo(rs.getString("titulo"));
-				site.setLayout(rs.getString("layout").charAt(0));
+				site.setLayout(rs.getByte("layout"));
 				site.setLogo(rs.getString("logo"));
 				site.setBack_menu(rs.getString("back_menu"));
 				site.setFonte_menu(rs.getString("fonte_menu"));
