@@ -21,7 +21,9 @@
 <div class="col-md-9">
 	<form enctype="multipart/form-data" class="form-horizontal"
 		action="criarSite" method="post">
-		<input type="hidden" value="${siteAdmin.id }" name="id">
+		<c:if test="${not empty siteAdmin }">
+			<input type="hidden" value="${siteAdmin.id }" name="id">
+		</c:if>
 		<div class="form-group">
 			<label class="control-label col-sm-2">Titulo:</label>
 
@@ -34,8 +36,7 @@
 		<div class="form-group">
 			<label class="control-label col-sm-2">Logo:</label>
 			<div class="col-sm-8">
-				<input type="file" name="fileLogo" class="file"
-					required="required">
+				<input type="file" name="fileLogo" class="file" required="required">
 			</div>
 		</div>
 		<div class="form-group">
@@ -43,17 +44,20 @@
 			<div class="col-sm-4">
 				<div class="radio">
 					<img style="border: 1px solid"
-						src=<c:url value="resources/imagens/layout_1.png"/>> <br />											
-					<label><input type="radio" required="required"  checked="${siteAdmin.layout == 1  ? 'checked' : ''}" name="layout" value="1">Opção 1</label>
-				
+						src=<c:url value="resources/imagens/layout_1.png"/>> <br />
+					<label><input type="radio" required="required"
+						<c:if test="${siteAdmin.layout == 1}">checked</c:if> name="layout"
+						value=1>Opção 1</label>
+
 				</div>
 			</div>
 			<div class="col-sm-4">
 				<div class="radio">
 					<img style="border: 1px solid"
 						src=<c:url value="resources/imagens/layout_2.png"/>> <br />
-					<label><input type="radio" required="required"  checked="${siteAdmin.layout == 2  ? 'checked' : ''}" 
-						name="layout" value="2">Opção 2</label>
+					<label><input type="radio" required="required"
+						<c:if test="${siteAdmin.layout == 2}">checked</c:if>  name="layout"
+						value=2>Opção 2</label>
 				</div>
 			</div>
 		</div>

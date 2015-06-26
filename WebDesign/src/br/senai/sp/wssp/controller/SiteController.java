@@ -3,6 +3,8 @@ package br.senai.sp.wssp.controller;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,8 +23,8 @@ import br.senai.sp.wssp.modelo.Site;
 public class SiteController implements ServletContextAware {
 	private ServletContext servletContext;
 	@Autowired
-	private SiteDao dao;
-
+	private SiteDao dao;	
+	
 	@RequestMapping("criarSite")
 	public String criarSite(Site site, MultipartFile fileLogo, HttpSession session) {		
 		int idSite;
@@ -31,13 +34,13 @@ public class SiteController implements ServletContextAware {
 			if (!pasta.exists()) {
 				pasta.mkdir();
 			}
-			path = path + "/logo_" + site.getTitulo() + ".jpg";
+			path = path + "/"+fileLogo.getOriginalFilename();
 			site.setLogo(path);
 			if (site.getId() == 0) {
 				idSite = dao.criarSite(site);	
 				site.setId(idSite);
 			}else{
-				
+				dao.atualizaSite(site);
 			}
 			
 			if (!fileLogo.isEmpty()) {
@@ -66,10 +69,39 @@ public class SiteController implements ServletContextAware {
 		return "forward:slide";
 	}
 	
-
+	
 	@Override
 	public void setServletContext(ServletContext context) {
 		this.servletContext = context;
 
 	}
+	
+	@RequestMapping("uploadSlide")
+	public  String uploadSlide(@RequestParam("files") MultipartFile[] files, HttpSession session){
+		List<String> imagens = new ArrayList<String>();
+		Site site = (Site) session.getAttribute("siteAdmin");
+		String path = "/imagens/"+site.getTitulo()+"/slide";
+		try {
+			File pasta = new File(servletContext.getRealPath(path));
+			if (!pasta.exists()) {
+				pasta.mkdir();
+			}
+			for (MultipartFile file : files) {
+				String nome = file.getOriginalFilename();
+				String imagem = path+"/"+nome;
+				byte[] bytes = file.getBytes();
+				BufferedOutputStream stream = new BufferedOutputStream(
+						new FileOutputStream(new File(servletContext.getRealPath(imagem))));
+				stream.write(bytes);
+				stream.close();
+				imagens.add(imagem);
+			}
+			dao.salvarSlide(imagens,site);					
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}		
+		return null;
+	}
+	
+
 }

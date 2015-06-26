@@ -22,7 +22,7 @@ function colorBackClick(inputColor, inputHex){
 
 function colorFonteClick(inputColor, inputHex){	
 	inputHex.value=inputColor.value;
-	document.getElementById("cor_resultante").style.color = inputColor.value;
+	document.getElementById("cor_resultante").style.color = inputColor.value;	
 }
 
 

@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Título do Site</title>
+<title>${site.Titulo }</title>
 <link
 	href=<c:url value="resources/bootstrap-3.3.5-dist/css/bootstrap.min.css"/>
 	rel="stylesheet">

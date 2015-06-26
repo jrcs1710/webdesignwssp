@@ -57,8 +57,8 @@
 		</div>
 		<div class="form-group">
 			<label class="control-label col-sm-3">Preview:</label>
-			<div class="col-sm-6" id="cor_resultante" style="background-color:${siteAdmin.back_menu}; ">
-				<h2 style="color:${siteAdmin.fonte_menu};">Teste</h2>
+			<div class="col-sm-6" id="cor_resultante" style="background-color:${siteAdmin.back_menu};color: ${siteAdmin.fonte_menu};">
+				<h2>Teste</h2>
 			</div>
 		</div>
 

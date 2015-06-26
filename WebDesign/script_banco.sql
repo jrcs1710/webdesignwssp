@@ -51,6 +51,7 @@ SELECT 	s.id,
         s.email, 
         s.back_rodape2,
         s.fonte_rodape2,
+        f.id id_foto,
         f.caminho
 FROM site s left join foto_slide f on s.id = f.id_site;
     

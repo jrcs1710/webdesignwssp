@@ -20,7 +20,7 @@ public class Site {
 	private String email;
 	private String back_rodape2;
 	private String fonte_rodape2;
-	private List<String> fotos_slide;
+	private List<FotoSlide> fotos_slide;
 	private List<Produto> produtos;
 
 	public int getId() {
@@ -159,11 +159,11 @@ public class Site {
 		this.fonte_rodape2 = fonte_rodape2;
 	}
 
-	public List<String> getFotos_slide() {
+	public List<FotoSlide> getFotos_slide() {
 		return fotos_slide;
 	}
 
-	public void setFotos_slide(List<String> fotos_slide) {
+	public void setFotos_slide(List<FotoSlide> fotos_slide) {
 		this.fotos_slide = fotos_slide;
 	}
 

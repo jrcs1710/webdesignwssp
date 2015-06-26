@@ -22,20 +22,17 @@
 <h4>Selecione os arquivos para upload:</h4>
 <div class="col-md-9">
 	<form class="form-horizontal" enctype="multipart/form-data"
-		action="upladSlide" method="post">
-		<input type="hidden" value="${id }" name="id" />
+		action="uploadSlide" method="post">		
 
 		<div class="form-group">
 			<label class="control-label col-sm-2">Imagem:</label>
 			<div class="col-sm-7">
-				<input type="file" multiple="multiple" name="files[0]" class="file" required="required">
-			</div>
+				<input type="file" multiple="multiple" name="files" class="file"
+					required="required">
+			</div>			
 		</div>
-
-
-
-		<br /> <br /> <br /> <br />
 	</form>
+	<br/><br/><br/>
 
 </div>
 

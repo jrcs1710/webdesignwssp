@@ -6,19 +6,19 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Título do Site</title>
+<title>${site.titulo }</title>
 <link
-	href=<c:url value="resources/bootstrap-3.3.5-dist/css/bootstrap.min.css"/>
+	href=<c:url value="/resources/bootstrap-3.3.5-dist/css/bootstrap.min.css"/>
 	rel="stylesheet">
-<link href=<c:url value="resources/css/estilo.css"/> rel="stylesheet">
-<link href=<c:url value="resources/icomoon/icomoon.css"/>
+<link href=<c:url value="/resources/css/estilo.css"/> rel="stylesheet">
+<link href=<c:url value="/resources/icomoon/icomoon.css"/>
 	rel="stylesheet">
-<link href=<c:url value="resources/css/image_effect.css"/>
+<link href=<c:url value="/resources/css/image_effect.css"/>
 	rel="stylesheet">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src=<c:url value="resources/jquery/jquery-2.1.4.min.js"/>></script>
+<script src=<c:url value="/resources/jquery/jquery-2.1.4.min.js"/>></script>
 <script
-	src=<c:url value="resources/bootstrap-3.3.5-dist/js/bootstrap.min.js"/>></script>
+	src=<c:url value="/resources/bootstrap-3.3.5-dist/js/bootstrap.min.js"/>></script>
 <style>
 .navbar-inverse .navbar-nav li a {
 	color: ${site.fonte_menu};
@@ -33,7 +33,7 @@
 			<c:choose>
 				<c:when test="${empty site }">
 					<img class="logo" alt="Logomarca empresa"
-						src="resources/imagens/logo.png">
+						src="../resources/imagens/logo.png">
 				</c:when>
 				<c:otherwise>
 					<img class="logo" alt="Logomarca empresa"
@@ -51,7 +51,7 @@
 					<li><a href="#">Empresa</a></li>
 					<li><a href="#">Produtos</a></li>
 					<li><a href="#">Localização</a></li>
-					<li><a href="#">Galeria</a></li>
+					<li><a href="#">Clientes</a></li>
 
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
