@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -103,5 +104,18 @@ public class SiteController implements ServletContextAware {
 		return null;
 	}
 	
-
+	@RequestMapping("excluirSlide")
+	public void excluirSlide(Integer idSlide, String caminho, HttpServletResponse response){	
+		System.out.println(idSlide);
+		dao.excluirFotoSlide(idSlide);
+		try {
+			File arquivo = new File(servletContext.getRealPath(caminho));
+			if (arquivo.exists()) {
+				arquivo.delete();
+			}			
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+		response.setStatus(200);
+	}
 }

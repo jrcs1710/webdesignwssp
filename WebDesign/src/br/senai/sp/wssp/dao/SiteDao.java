@@ -163,4 +163,16 @@ public class SiteDao {
 		}
 		return lista;
 	}
+	
+	public void excluirFotoSlide(int id){
+		String sql = "DELETE FROM foto_slide WHERE id  = ?";
+		try {
+			PreparedStatement stmt = conexao.prepareStatement(sql);
+			stmt.setInt(1, id);
+			stmt.execute();
+			stmt.close();
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
 }
