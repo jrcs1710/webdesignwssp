@@ -20,7 +20,7 @@ figcaption {
 	line-height: 25px;
 }
 .logo {
-	width:18%;	
+	max-width: 215px;	
 }
 .footer {
 	margin-top: 20px;

@@ -11,7 +11,7 @@ create table if not exists site (
     fonte_rodape varchar(255),
     foto_empresa varchar(500),
     foto_produto varchar(500),
-    foto_galeria varchar(500),
+    foto_cliente varchar(500),
     fonte_chamada varchar(255),
     back_chamada varchar(255),
     telefone varchar(12),
@@ -23,7 +23,7 @@ create table if not exists foto_slide (
 	id int primary key auto_increment,
     id_site int not null,
     caminho varchar(500),
-    foreign key (id_site) references site(id)
+    foreign key (id_site) references site(id) on delete cascade
 );
 create table if not exists produto (
 	id int primary key auto_increment,
@@ -31,7 +31,7 @@ create table if not exists produto (
     descricao varchar(255),
     foto varchar(500),
     destaque boolean,
-    foreign key(id_site) references site(id)
+    foreign key(id_site) references site(id) on delete cascade
 );
 create view view_site as
 SELECT 	s.id, 
@@ -44,7 +44,7 @@ SELECT 	s.id,
         s.fonte_rodape,
         s.foto_empresa,
         s.foto_produto,
-        s.foto_galeria,
+        s.foto_cliente,
         s.fonte_chamada,
         s.back_chamada,
         s.telefone,

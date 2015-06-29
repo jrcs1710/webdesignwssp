@@ -68,22 +68,22 @@
 <div class="row">
 	<div class="col-sm-4">
 		<figure>
-			<a href="#"> <img src="../resources/imagens/coluna.png">
+			<a href=<c:url value="/empresa"/>> <img src=<c:url value="${empty site.foto_empresa ? '/resources/imagens/coluna.png' : site.foto_empresa}"/>>
 			</a>
-			<figcaption>Empresa</figcaption>
+			<figcaption style="background-color: ${empty site.back_chamada ? '#000000' : site.back_chamada};color:${empty site.fonte_chamada ? '#ffffff' : site.fonte_chamada}">Empresa</figcaption>
 		</figure>
 	</div>
 	<div class="col-sm-4">
 		<figure>
-			<img src="../resources/imagens/coluna.png">
-			<figcaption>Produtos</figcaption>
+			<a href=<c:url value="/produtos"/>> <img src=<c:url value="${empty site.foto_produto ? '/resources/imagens/coluna.png' : site.foto_produto}"/>></a>
+			<figcaption style="background-color: ${empty site.back_chamada ? '#000000' : site.back_chamada};color:${empty site.fonte_chamada ? '#ffffff' : site.fonte_chamada}">Produtos</figcaption>
 		</figure>
 	</div>
 
 	<div class="col-sm-4">
 		<figure>
-			<img src="../resources/imagens/coluna.png">
-			<figcaption>Clientes</figcaption>
+			<a href=<c:url value="/clientes"/>> <img src=<c:url value="${empty site.foto_cliente ? '/resources/imagens/coluna.png' : site.foto_cliente}"/>></a>
+			<figcaption style="background-color: ${empty site.back_chamada ? '#000000' : site.back_chamada};color:${empty site.fonte_chamada ? '#ffffff' : site.fonte_chamada}">Clientes</figcaption>
 		</figure>
 	</div>
 </div>

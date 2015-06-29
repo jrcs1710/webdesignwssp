@@ -38,5 +38,15 @@ public class AdminController {
 		}		
 		return "admin/slide";
 	}
+	
+	@RequestMapping("destaques")
+	public String paginicial(){
+		return "admin/destaques";
+	}
+	
+	@RequestMapping("cadprodutos")
+	public String cadProdutos(){
+		return "admin/cadproduto";
+	}
 
 }

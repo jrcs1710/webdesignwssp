@@ -14,13 +14,15 @@
 		<li><a href="novo">Layout</a></li>
 		<li class="active"><a href="menu">Menu</a></li>
 		<li><a href="slide">Slider</a></li>
-		<li><a href="#">Página inicial</a></li>
+		<li><a href="destaques">Destaques</a></li>
 		<li><a href="#">Produtos</a></li>
 		<li><a href="#">Rodapé</a></li>
 	</ul>
 </div>
 
 <div class="col-md-9">
+<fieldset>
+<legend>Definições de menu</legend>
 	<form class="form-horizontal" action="criarMenu" method="post">
 		<input type="hidden" value="${siteAdmin.id }" name="id" />
 		<div class="form-group">
@@ -35,7 +37,7 @@
 			<div class="col-sm-3">
 				<h4>Código Hexadecimal:</h4>
 				<input type="text" id="input_hex_back" class="col-sm-3 form-control"
-					style="text-align: center;" readonly="readonly" value="${siteAdmin.back_menu}" name="backColor">
+					style="text-align: center;" readonly="readonly" value="${empty siteAdmin.back_menu ? '#000000' : siteAdmin.back_menu}" name="backColor">
 			</div>
 		</div>
 
@@ -52,13 +54,13 @@
 				<h4>Código Hexadecimal:</h4>
 				<input type="text" id="input_hex_fonte"
 					class="col-sm-3 form-control" style="text-align: center;"
-					readonly="readonly" name="fontColor" value="${siteAdmin.fonte_menu }">
+					readonly="readonly" name="fontColor" value="${empty siteAdmin.fonte_menu ? '#ffffff' : siteAdmin.fonte_menu }">
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="control-label col-sm-3">Preview:</label>
-			<div class="col-sm-6" id="cor_resultante" style="background-color:${siteAdmin.back_menu};color: ${siteAdmin.fonte_menu};">
-				<h2>Teste</h2>
+			<div class="col-sm-6" id="cor_resultante" style="background-color:${empty siteAdmin.back_menu ? '#000000' : siteAdmin.back_menu};color: ${empty siteAdmin.fonte_menu ? '#ffffff' : siteAdmin.fonte_menu};">
+				<h2>Texto</h2>
 			</div>
 		</div>
 
@@ -67,6 +69,7 @@
 		</div>
 		<br /> <br /> <br /> <br />
 	</form>
+	</fieldset>
 </div>
 
 <c:import url="template/rodape_admin.jsp" />

@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import br.senai.sp.wssp.modelo.FotoSlide;
+import br.senai.sp.wssp.modelo.Produto;
 import br.senai.sp.wssp.modelo.Site;
 
 @Repository
@@ -97,7 +98,7 @@ public class SiteDao {
 				site.setFonte_rodape(rs.getString("fonte_rodape"));
 				site.setFoto_empresa(rs.getString("foto_empresa"));
 				site.setFoto_produto(rs.getString("foto_produto"));
-				site.setFoto_galeria(rs.getString("foto_galeria"));
+				site.setFoto_cliente(rs.getString("foto_cliente"));
 				site.setFonte_chamada(rs.getString("fonte_chamada"));
 				site.setBack_chamada(rs.getString("back_chamada"));
 				site.setTelefone(rs.getString("telefone"));
@@ -144,6 +145,18 @@ public class SiteDao {
 		}
 	}
 
+	public void excluirFotoSlide(int id) {
+		String sql = "DELETE FROM foto_slide WHERE id  = ?";
+		try {
+			PreparedStatement stmt = conexao.prepareStatement(sql);
+			stmt.setInt(1, id);
+			stmt.execute();
+			stmt.close();
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
 	public List<FotoSlide> buscarFotos(int idSite) {
 		String sql = "SELECT * FROM foto_slide WHERE id_site = ?";
 		List<FotoSlide> lista = new ArrayList<FotoSlide>();
@@ -151,7 +164,7 @@ public class SiteDao {
 			PreparedStatement stmt = conexao.prepareStatement(sql);
 			stmt.setInt(1, idSite);
 			ResultSet rs = stmt.executeQuery();
-			while (rs.next()) {					
+			while (rs.next()) {
 				FotoSlide fs = new FotoSlide();
 				fs.setId(rs.getInt("id"));
 				fs.setCaminho(rs.getString("caminho"));
@@ -164,11 +177,31 @@ public class SiteDao {
 		return lista;
 	}
 	
-	public void excluirFotoSlide(int id){
-		String sql = "DELETE FROM foto_slide WHERE id  = ?";
+	public void definirDestaques(String backColor, String fontColor, List<String> imagens, int id){
+		String sql = "UPDATE site SET back_chamada = ?, fonte_chamada = ?, foto_empresa = ?, foto_produto = ?, foto_cliente = ? WHERE id = ?";
 		try {
 			PreparedStatement stmt = conexao.prepareStatement(sql);
-			stmt.setInt(1, id);
+			stmt.setString(1, backColor);
+			stmt.setString(2, fontColor);
+			stmt.setString(3, imagens.get(0));
+			stmt.setString(4, imagens.get(1));
+			stmt.setString(5, imagens.get(2));
+			stmt.setInt(6, id);
+			stmt.execute();
+			stmt.close();
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	public void cadastrarProduto(Produto produto, int idSite){
+		String sql = "INSERT INTO produto(id_site, descricao, foto, destaque) VALUES(?,?,?,?)";
+		try {
+			PreparedStatement stmt = conexao.prepareStatement(sql);
+			stmt.setInt(1, idSite);
+			stmt.setString(2, produto.getDescricao());
+			stmt.setString(3, produto.getFoto());
+			stmt.setBoolean(4, produto.isDestaque());
 			stmt.execute();
 			stmt.close();
 		} catch (Exception e) {

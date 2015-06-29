@@ -13,7 +13,7 @@ public class Site {
 	private String fonte_rodape;
 	private String foto_empresa;
 	private String foto_produto;
-	private String foto_galeria;
+	private String foto_cliente;
 	private String fonte_chamada;
 	private String back_chamada;
 	private String telefone;
@@ -103,12 +103,12 @@ public class Site {
 		this.foto_produto = foto_produto;
 	}
 
-	public String getFoto_galeria() {
-		return foto_galeria;
+	public String getFoto_cliente() {
+		return foto_cliente;
 	}
 
-	public void setFoto_galeria(String foto_galeria) {
-		this.foto_galeria = foto_galeria;
+	public void setFoto_cliente(String foto_cliente) {
+		this.foto_cliente= foto_cliente;
 	}
 
 	public String getFonte_chamada() {

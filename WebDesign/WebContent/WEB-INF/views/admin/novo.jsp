@@ -12,13 +12,15 @@
 		<li class="active"><a href="novo">Layout</a></li>
 		<li><a href="menu">Menu</a></li>
 		<li><a href="slide">Slider</a></li>
-		<li><a href="#">Página inicial</a></li>
+		<li><a href="destaques">Destaques</a></li>
 		<li><a href="#">Produtos</a></li>
 		<li><a href="#">Rodapé</a></li>
 	</ul>
 </div>
 
 <div class="col-md-9">
+<fieldset>
+<legend>Definições de layout</legend>
 	<form enctype="multipart/form-data" class="form-horizontal"
 		action="criarSite" method="post">
 		<c:if test="${not empty siteAdmin }">
@@ -66,6 +68,7 @@
 		</div>
 		<br /> <br /> <br /> <br />
 	</form>
+	</fieldset>
 </div>
 
 <c:import url="template/rodape_admin.jsp" />
