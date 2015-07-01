@@ -13,8 +13,8 @@
 		<li><a href="menu">Menu</a></li>
 		<li><a href="slide">Slider</a></li>
 		<li><a href="destaques">Destaques</a></li>
-		<li><a href="#">Produtos</a></li>
-		<li><a href="#">Rodapé</a></li>
+		<li><a href="cadprodutos">Produtos</a></li>
+		<li><a href="rodape">Rodapé</a></li>
 	</ul>
 </div>
 

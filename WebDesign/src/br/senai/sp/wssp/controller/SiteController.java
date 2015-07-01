@@ -3,6 +3,7 @@ package br.senai.sp.wssp.controller;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -113,12 +114,12 @@ public class SiteController implements ServletContextAware {
 	@RequestMapping("excluirSlide")
 	public void excluirSlide(Integer idSlide, String caminho,
 			HttpServletResponse response) {
-		System.out.println(idSlide);
 		try {
 			File arquivo = new File(servletContext.getRealPath(caminho));
 			if (arquivo.exists()) {
 				arquivo.delete();
 			}
+			dao.excluirFotoSlide(idSlide);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -127,37 +128,97 @@ public class SiteController implements ServletContextAware {
 
 	@RequestMapping("defineDestaques")
 	public String defineDestaques(String backColor, String fontColor, int id,
-			HttpSession session, @RequestParam("imagens") MultipartFile[] imagens) {
+			HttpSession session,
+			@RequestParam("imagens") MultipartFile[] imagens) {
 		Site siteAdmin = (Site) session.getAttribute("siteAdmin");
-		String path = "/imagens/" + siteAdmin.getTitulo()+"/destaque";
+		String path = "/imagens/" + siteAdmin.getTitulo() + "/destaque";
 		List<String> paths = new ArrayList<String>();
 		try {
 			File pasta = new File(servletContext.getRealPath(path));
 			if (!pasta.exists()) {
 				pasta.mkdir();
 			}
-			for (MultipartFile imagem : imagens ) {
+			for (MultipartFile imagem : imagens) {
 				String nome = imagem.getOriginalFilename();
-				String pathImagem = path+"/"+nome;
+				String pathImagem = path + "/" + nome;
 				byte[] bytes = imagem.getBytes();
-				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(servletContext.getRealPath(pathImagem))));
+				BufferedOutputStream stream = new BufferedOutputStream(
+						new FileOutputStream(new File(
+								servletContext.getRealPath(pathImagem))));
 				stream.write(bytes);
 				stream.close();
 				paths.add(pathImagem);
 			}
-			dao.definirDestaques(backColor, fontColor, paths,id);
+			dao.definirDestaques(backColor, fontColor, paths, id);
 			siteAdmin.setBack_chamada(backColor);
 			siteAdmin.setFonte_chamada(fontColor);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
-		return null;
+		return "forward:cadprodutos";
 	}
-	
-	@RequestMapping("cadastraProduto")
-	public @ResponseBody String cadProduto(Produto produto, int idSite, MultipartFile imagem, HttpSession session){
-		Site siteAdmin = (Site)session.getAttribute("siteAdmin");
-		
+
+	@RequestMapping("defineRodape")
+	public String defineRodape(String backColor, String fontColor,
+			String backColor2, String fontColor2, String telefone,
+			String email, int id, HttpSession session,
+			@RequestParam("imagens") MultipartFile[] imagens) {
+		Site siteAdmin = (Site) session.getAttribute("siteAdmin");
+
+		siteAdmin.setBack_rodape(backColor);
+		siteAdmin.setFonte_rodape(fontColor);
+		siteAdmin.setBack_rodape2(backColor2);
+		siteAdmin.setFonte_rodape2(fontColor2);
+
+		return "forward:cadprodutos";
+	}
+
+	@RequestMapping(value = "cadastraProduto")
+	public @ResponseBody String cadProduto(Produto produto,
+			@RequestParam("idSite") Long idSite, MultipartFile imagem,
+			HttpSession session) {
+		Charset charset = Charset.forName("UTF-8");
+		produto.setDescricao(new String(produto.getDescricao().getBytes(),
+				charset));
+		int retorno;
+		Site siteAdmin = (Site) session.getAttribute("siteAdmin");
+		String path = "/imagens/" + siteAdmin.getTitulo() + "/produtos";
+		try {
+			File pasta = new File(servletContext.getRealPath(path));
+			if (!pasta.exists()) {
+				pasta.mkdir();
+			}
+			path = path + "/" + imagem.getOriginalFilename();
+			byte[] bytes = imagem.getBytes();
+			produto.setFoto(path);
+			BufferedOutputStream stream = new BufferedOutputStream(
+					new FileOutputStream(new File(
+							servletContext.getRealPath(path))));
+			stream.write(bytes);
+			stream.close();
+			retorno = dao.cadastrarProduto(produto, idSite.intValue());
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+
+		return String.valueOf(retorno);
+	}
+
+	@RequestMapping("excluirProduto")
+	public void excluirProduto(Integer idProduto, HttpServletResponse response) {
+		System.out.println(idProduto);
+		String caminho = dao.buscarCaminhoProduto(idProduto);
+
+		try {
+			File arquivo = new File(servletContext.getRealPath(caminho));
+			if (arquivo.exists()) {
+				arquivo.delete();
+			}
+			dao.excluirProduto(idProduto);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+		response.setStatus(200);
 	}
 
 }

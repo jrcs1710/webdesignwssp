@@ -25,6 +25,17 @@ function colorFonteClick(inputColor, inputHex){
 	document.getElementById("cor_resultante").style.color = inputColor.value;	
 }
 
+function colorBackClick2(inputColor, inputHex){	
+	inputHex.value=inputColor.value;	
+	document.getElementById("cor_resultante_2").style.backgroundColor = inputColor.value;
+}
+
+function colorFonteClick2(inputColor, inputHex){	
+	inputHex.value=inputColor.value;
+	document.getElementById("cor_resultante_2").style.color = inputColor.value;	
+}
+
+
 
 //Converte RGB <--> hexadecimal
 var histr = new Array();

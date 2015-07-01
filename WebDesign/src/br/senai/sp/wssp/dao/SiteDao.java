@@ -12,6 +12,8 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.sun.org.apache.regexp.internal.RESyntaxException;
+
 import br.senai.sp.wssp.modelo.FotoSlide;
 import br.senai.sp.wssp.modelo.Produto;
 import br.senai.sp.wssp.modelo.Site;
@@ -62,7 +64,7 @@ public class SiteDao {
 			stmt.execute();
 			stmt.close();
 		} catch (Exception e) {
-			// TODO: handle exception
+			throw new RuntimeException(e);
 		}
 	}
 
@@ -87,8 +89,9 @@ public class SiteDao {
 			PreparedStatement stmt = conexao.prepareStatement(sql);
 			stmt.setString(1, titulo);
 			ResultSet rs = stmt.executeQuery();
-			if (rs.next()) {
+			if (rs.next()) {				
 				site = new Site();
+				site.setId(rs.getInt("id"));
 				site.setTitulo(rs.getString("titulo"));
 				site.setLayout(rs.getByte("layout"));
 				site.setLogo(rs.getString("logo"));
@@ -176,8 +179,9 @@ public class SiteDao {
 		}
 		return lista;
 	}
-	
-	public void definirDestaques(String backColor, String fontColor, List<String> imagens, int id){
+
+	public void definirDestaques(String backColor, String fontColor,
+			List<String> imagens, int id) {
 		String sql = "UPDATE site SET back_chamada = ?, fonte_chamada = ?, foto_empresa = ?, foto_produto = ?, foto_cliente = ? WHERE id = ?";
 		try {
 			PreparedStatement stmt = conexao.prepareStatement(sql);
@@ -193,19 +197,103 @@ public class SiteDao {
 			throw new RuntimeException(e);
 		}
 	}
-	
-	public void cadastrarProduto(Produto produto, int idSite){
+
+	public int cadastrarProduto(Produto produto, int idSite) {
+		int retorno = 0;
 		String sql = "INSERT INTO produto(id_site, descricao, foto, destaque) VALUES(?,?,?,?)";
 		try {
-			PreparedStatement stmt = conexao.prepareStatement(sql);
+			PreparedStatement stmt = conexao.prepareStatement(sql,
+					Statement.RETURN_GENERATED_KEYS);
 			stmt.setInt(1, idSite);
 			stmt.setString(2, produto.getDescricao());
 			stmt.setString(3, produto.getFoto());
 			stmt.setBoolean(4, produto.isDestaque());
 			stmt.execute();
+			ResultSet keys = stmt.getGeneratedKeys();
+			if (keys.next()) {
+				retorno = keys.getInt(1);
+			}
+			keys.close();
 			stmt.close();
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
+		return retorno;
+	}
+
+	public List<Produto> buscarProdutos(int idSite) {
+		List<Produto> lista = new ArrayList<Produto>();
+		String sql = "SELECT * FROM produto WHERE id_site = ?";
+		try {
+			PreparedStatement stmt = conexao.prepareStatement(sql);
+			stmt.setInt(1, idSite);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				Produto p = new Produto();
+				p.setDescricao(rs.getString("descricao"));
+				p.setDestaque(rs.getBoolean("destaque"));
+				p.setFoto(rs.getString("foto"));
+				lista.add(p);
+			}
+			rs.close();
+			stmt.close();
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+		return lista;
+	}
+	
+	public List<Produto> buscarProdutosDestaque(int idSite) {
+		List<Produto> lista = new ArrayList<Produto>();
+		String sql = "SELECT * FROM produto WHERE id_site = ? AND destaque = ? ORDER BY ID DESC LIMIT 4";
+		try {
+			PreparedStatement stmt = conexao.prepareStatement(sql);
+			stmt.setInt(1, idSite);
+			stmt.setBoolean(2, true);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				Produto p = new Produto();
+				p.setId(rs.getInt("id"));
+				p.setDescricao(rs.getString("descricao"));
+				p.setDestaque(rs.getBoolean("destaque"));
+				p.setFoto(rs.getString("foto"));
+				lista.add(p);
+			}
+			rs.close();
+			stmt.close();
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+		return lista;
+	}
+
+	public void excluirProduto(int idProduto) {
+		String sql = "DELETE FROM produto WHERE id = ?";
+		try {
+			PreparedStatement stmt = conexao.prepareStatement(sql);
+			stmt.setInt(1, idProduto);
+			stmt.execute();
+			stmt.close();
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	public String buscarCaminhoProduto(int idProduto) {
+		String retorno = null;
+		String sql = "SELECT foto FROM produto WHERE id = ?";
+		try {
+			PreparedStatement stmt = conexao.prepareStatement(sql);
+			stmt.setInt(1, idProduto);
+			ResultSet rs = stmt.executeQuery();
+			if (rs.next()) {
+				retorno = rs.getString("foto");
+			}
+			rs.close();
+			stmt.close();
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+		return retorno;
 	}
 }

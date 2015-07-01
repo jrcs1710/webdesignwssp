@@ -91,7 +91,7 @@ footer h4 {
 .form-group {
 	text-align: center;
 }
-#cor_resultante {
+#cor_resultante, #cor_resultante_2 {
 	border-radius:15px;
 	border: 1px solid #000;
 	

@@ -40,12 +40,21 @@ public class AdminController {
 	}
 	
 	@RequestMapping("destaques")
-	public String paginicial(){
+	public String destaques(){
 		return "admin/destaques";
 	}
 	
+	@RequestMapping("rodape")
+	public String rodape(){
+		return "admin/rodape";
+	}
+	
 	@RequestMapping("cadprodutos")
-	public String cadProdutos(){
+	public String cadProdutos(HttpSession session, Model model){
+		Site siteAdmin = (Site) session.getAttribute("siteAdmin");
+		if (siteAdmin != null) {
+			model.addAttribute("produtos", dao.buscarProdutos(siteAdmin.getId()));
+		}
 		return "admin/cadproduto";
 	}
 
