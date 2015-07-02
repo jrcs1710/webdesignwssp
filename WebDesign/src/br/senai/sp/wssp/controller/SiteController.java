@@ -177,6 +177,7 @@ public class SiteController implements ServletContextAware {
 	public @ResponseBody String cadProduto(Produto produto,
 			@RequestParam("idSite") Long idSite, MultipartFile imagem,
 			HttpSession session) {
+		System.out.println(produto.isDestaque());
 		Charset charset = Charset.forName("UTF-8");
 		produto.setDescricao(new String(produto.getDescricao().getBytes(),
 				charset));

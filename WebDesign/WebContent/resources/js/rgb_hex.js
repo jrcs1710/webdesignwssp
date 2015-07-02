@@ -35,6 +35,14 @@ function colorFonteClick2(inputColor, inputHex){
 	document.getElementById("cor_resultante_2").style.color = inputColor.value;	
 }
 
+function atualizaBack(input, div){
+	div.style.backgroundColor = input.value;
+}
+
+function atualizaFonte(input, div){
+	div.style.color = input.value;
+}
+
 
 
 //Converte RGB <--> hexadecimal

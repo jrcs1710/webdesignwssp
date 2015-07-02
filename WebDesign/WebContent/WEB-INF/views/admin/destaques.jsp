@@ -38,7 +38,7 @@
 					<h4>Código Hexadecimal:</h4>
 					<input type="text" id="input_hex_back"
 						class="col-sm-3 form-control" style="text-align: center;"
-						readonly="readonly" value="${empty siteAdmin.back_chamada ? siteAdmin.back_menu : siteAdmin.back_chamada}"
+						onblur="atualizaBack(this,cor_resultante)" value="${empty siteAdmin.back_chamada ? siteAdmin.back_menu : siteAdmin.back_chamada}"
 						name="backColor">
 				</div>
 			</div>
@@ -56,7 +56,7 @@
 					<h4>Código Hexadecimal:</h4>
 					<input type="text" id="input_hex_fonte"
 						class="col-sm-3 form-control" style="text-align: center;"
-						readonly="readonly" name="fontColor"
+						onblur="atualizaFonte(this,cor_resultante)" name="fontColor"
 						value="${empty siteAdmin.fonte_chamada ? siteAdmin.fonte_menu : siteAdmin.fonte_chamada}">
 				</div>
 			</div>

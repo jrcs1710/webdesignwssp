@@ -298,6 +298,7 @@ public class SiteDao {
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
 				Produto p = new Produto();
+				p.setId(rs.getInt("id"));
 				p.setDescricao(rs.getString("descricao"));
 				p.setDestaque(rs.getBoolean("destaque"));
 				p.setFoto(rs.getString("foto"));
@@ -310,6 +311,7 @@ public class SiteDao {
 		}
 		return lista;
 	}
+		
 
 	public List<Produto> buscarProdutosDestaque(int idSite) {
 		List<Produto> lista = new ArrayList<Produto>();

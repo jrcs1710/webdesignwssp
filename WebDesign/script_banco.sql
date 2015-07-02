@@ -14,7 +14,7 @@ create table if not exists site (
     foto_cliente varchar(500),
     fonte_chamada varchar(255),
     back_chamada varchar(255),
-    telefone varchar(12),
+    telefone varchar(15),
     email varchar(255),
     back_rodape2 varchar(255),
     fonte_rodape2 varchar(255)

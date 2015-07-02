@@ -1,6 +1,7 @@
 package br.senai.sp.wssp.controller;
 
 import java.util.List;
+import java.util.PrimitiveIterator.OfDouble;
 
 import javax.servlet.http.HttpSession;
 
@@ -28,6 +29,7 @@ public class IndexController {
 			model.addAttribute("produtosDestaque", produtos);
 		}
 		session.setAttribute("site", site);
+		session.setAttribute("titulo", titulo);
 
 		if (site != null && site.getLayout() == 2) {
 			return "layout2/index";
@@ -45,4 +47,39 @@ public class IndexController {
 			return "layout1/clientes";
 		}
 	}
+	
+	@RequestMapping("empresa")
+	public String empresa(HttpSession session) {
+		Site site = (Site) session.getAttribute("site");
+		if (site != null && site.getLayout() == 2) {
+			return "layout2/empresa";
+		} else {
+			return "layout1/empresa";
+		}
+	}
+	
+	@RequestMapping("localizacao")
+	public String localizacao(HttpSession session) {
+		Site site = (Site) session.getAttribute("site");
+		if (site != null && site.getLayout() == 2) {
+			return "layout2/localizacao";
+		} else {
+			return "layout1/localizacao";
+		}
+	}
+	
+	@RequestMapping("produtos")
+	public String produtos(HttpSession session) {
+		Site site = (Site) session.getAttribute("site");
+		if (site != null) {
+			List<Produto> produtos = dao.buscarProdutos(site.getId());	
+			session.setAttribute("produtosSite", produtos);
+		}		
+		if (site != null && site.getLayout() == 2) {
+			return "layout2/produtos";
+		} else {
+			return "layout1/produtos";
+		}
+	}
+	
 }

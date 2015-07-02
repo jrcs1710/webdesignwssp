@@ -36,7 +36,7 @@
 			<c:choose>
 				<c:when test="${empty site }">
 					<img class="logo" style="margin-left: 14px;"
-						alt="Logomarca empresa" src="resources/imagens/logo.png">
+						alt="Logomarca empresa" src=<c:url value="/resources/imagens/logo.png"/>>
 				</c:when>
 				<c:otherwise>
 					<img class="logo" style="margin-left: 14px;"
@@ -55,7 +55,7 @@
 
 				<ul class="nav nav-pills nav-stacked"
 					>
-					<li><a href=<c:url value="/index/${site.titulo }"/>>Home</a></li>
+					<li><a href=<c:url value="/index/${site == null ? titulo : site.titulo }"/>>Home</a></li>
 					<li><a href=<c:url value="/empresa"/>>Empresa</a></li>
 					<li><a href=<c:url value="/produtos"/>>Produtos</a></li>
 					<li><a href=<c:url value="/localizacao"/>>Localização</a></li>

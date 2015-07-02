@@ -33,7 +33,7 @@
 			<c:choose>
 				<c:when test="${empty site }">
 					<img class="logo" alt="Logomarca empresa"
-						src="../resources/imagens/logo.png">
+						src=<c:url value="/resources/imagens/logo.png"/>>
 				</c:when>
 				<c:otherwise>
 					<img class="logo" alt="Logomarca empresa"
@@ -47,7 +47,7 @@
 			<div class="container-fluid">
 
 				<ul class="nav navbar-nav">
-					<li><a href=<c:url value="/index/${site.titulo }"/>>Home</a></li>
+					<li><a href=<c:url value="/index/${site == null ? titulo : site.titulo }"/>>Home</a></li>
 					<li><a href=<c:url value="/empresa"/>>Empresa</a></li>
 					<li><a href=<c:url value="/produtos"/>>Produtos</a></li>
 					<li><a href=<c:url value="/localizacao"/>>Localização</a></li>

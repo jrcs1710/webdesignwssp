@@ -50,7 +50,6 @@
 			</div>
 	</c:if>
 
-
 	<!-- Left and right controls -->
 	<a class="left carousel-control" href="#myCarousel" role="button"
 		data-slide="prev"> <span class="glyphicon glyphicon-chevron-left"
@@ -64,52 +63,72 @@
 <div class="row">
 	<div class="col-sm-4">
 		<figure>
-			<a href="#"> <img src="resources/imagens/coluna.png">
+			<a href=<c:url value="/empresa"/>> <img
+				src=<c:url value="${empty site.foto_empresa ? '/resources/imagens/coluna.png' : site.foto_empresa}"/>>
 			</a>
-			<figcaption>Empresa</figcaption>
+			<figcaption
+				style="background-color: ${empty site.back_chamada ? '#000000' : site.back_chamada};color:${empty site.fonte_chamada ? '#ffffff' : site.fonte_chamada}">Empresa</figcaption>
 		</figure>
 	</div>
 	<div class="col-sm-4">
 		<figure>
-			<img src="resources/imagens/coluna.png">
-			<figcaption>Produtos</figcaption>
+			<a href=<c:url value="/produtos"/>> <img
+				src=<c:url value="${empty site.foto_produto ? '/resources/imagens/coluna.png' : site.foto_produto}"/>></a>
+			<figcaption
+				style="background-color: ${empty site.back_chamada ? '#000000' : site.back_chamada};color:${empty site.fonte_chamada ? '#ffffff' : site.fonte_chamada}">Produtos</figcaption>
 		</figure>
 	</div>
 
 	<div class="col-sm-4">
 		<figure>
-			<img src="resources/imagens/coluna.png">
-			<figcaption>Galeria</figcaption>
+			<a href=<c:url value="/clientes"/>> <img
+				src=<c:url value="${empty site.foto_cliente ? '/resources/imagens/coluna.png' : site.foto_cliente}"/>></a>
+			<figcaption
+				style="background-color: ${empty site.back_chamada ? '#000000' : site.back_chamada};color:${empty site.fonte_chamada ? '#ffffff' : site.fonte_chamada}">Clientes</figcaption>
 		</figure>
 	</div>
 </div>
-<h3>Produtos em destaque:</h3>
-<div class="row destaque">
-	<div class="col-sm-3 col-md-3 col_dest">
-		<img src="resources/imagens/coluna_dest.png">
-		<div class="mask">
-			<h2>Destaque 1</h2>
-		</div>
+<h3 style="color:${site.back_chamada}">Produtos em destaque:</h3>
+<c:if test="${produtosDestaque.size() > 0}">
+	<div class="row destaque">
+		<c:forEach items="${produtosDestaque}" var="produto">
+			<div class="col-sm-3 col-md-3 col_dest">
+				<img src=<c:url value="${produto.foto }"/>>
+				<div class="mask">
+					<h2>${produto.descricao }</h2>
+				</div>
+			</div>
+		</c:forEach>
 	</div>
-	<div class="col-sm-3 col-md-3 col_dest">
-		<img src="resources/imagens/coluna_dest.png">
-		<div class="mask">
-			<h2>Destaque 2</h2>
-		</div>
-	</div>
-	<div class="col-sm-3 col-md-3 col_dest">
-		<img src="resources/imagens/coluna_dest.png">
-		<div class="mask">
-			<h2>Destaque 3</h2>
-		</div>
-	</div>
-	<div class="col-sm-3 col-md-3 col_dest">
-		<img src="resources/imagens/coluna_dest.png">
-		<div class="mask">
-			<h2>Destaque 4</h2>
-		</div>
-	</div>
+</c:if>
 
-</div>
+<c:if test="${site == null || produtosDestaque.size() == 0}">
+	<div class="row destaque">
+		<div class="col-sm-3 col-md-3 col_dest">
+			<img src="../resources/imagens/coluna_dest.png">
+			<div class="mask">
+				<h2>Destaque 1</h2>
+			</div>
+		</div>
+		<div class="col-sm-3 col-md-3 col_dest">
+			<img src="../resources/imagens/coluna_dest.png">
+			<div class="mask">
+				<h2>Destaque 2</h2>
+			</div>
+		</div>
+		<div class="col-sm-3 col-md-3 col_dest">
+			<img src="../resources/imagens/coluna_dest.png">
+			<div class="mask">
+				<h2>Destaque 3</h2>
+			</div>
+		</div>
+		<div class="col-sm-3 col-md-3 col_dest">
+			<img src="../resources/imagens/coluna_dest.png">
+			<div class="mask">
+				<h2>Destaque 4</h2>
+			</div>
+		</div>
+	</div>
+</c:if>
 </div>
 <c:import url="/WEB-INF/views/template/layout2/rodape.jsp" />

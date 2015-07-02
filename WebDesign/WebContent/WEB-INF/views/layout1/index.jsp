@@ -50,10 +50,6 @@
 		</div>
 </c:if>
 
-
-
-
-
 <!-- Left and right controls -->
 <a class="left carousel-control" href="#myCarousel" role="button"
 	data-slide="prev"> <span class="glyphicon glyphicon-chevron-left"

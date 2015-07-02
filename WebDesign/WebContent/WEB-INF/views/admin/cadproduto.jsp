@@ -14,13 +14,17 @@ function inserir(){
 	var data = new FormData();
 	var idSite = $('#idSite').val();
 	var descricao = $('#descricao').val();
-	var destaque = $('#destaque').val();
+	var destaque;
+	if($('#destaque').is(":checked")){
+		destaque = 'on';
+	}else{
+		destaque = 'off';
+	}	
 	var imagem = $('#imagem').get(0).files[0];
 	data.append('idSite',idSite);
 	data.append('descricao',descricao);
 	data.append('destaque',destaque);
-	data.append('imagem',imagem);
-	
+	data.append('imagem',imagem);	
 	$.ajax({
 		url:formUrl,
 		type:'POST',
@@ -85,7 +89,7 @@ function excluirProduto(id){
 				<label class="control-label col-sm-2">Destaque:</label>
 
 				<div class="col-sm-1">
-					<input type="checkbox" required="required" id="destaque"
+					<input type="checkbox" id="destaque"
 						name="destaque" class="form-control">
 				</div>
 			</div>

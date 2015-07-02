@@ -58,7 +58,7 @@
 					<h4>Código Hexadecimal:</h4>
 					<input type="text" id="input_hex_back"
 						class="col-sm-3 form-control" style="text-align: center;"
-						readonly="readonly"
+						onblur="atualizaBack(this,cor_resultante)"
 						value="${empty siteAdmin.back_rodape ? siteAdmin.back_menu : siteAdmin.back_rodape}"
 						name="backColor">
 				</div>
@@ -77,7 +77,7 @@
 					<h4>Código Hexadecimal:</h4>
 					<input type="text" id="input_hex_fonte"
 						class="col-sm-3 form-control" style="text-align: center;"
-						readonly="readonly" name="fontColor"
+						onblur="atualizaFonte(this,cor_resultante)" name="fontColor"
 						value="${empty siteAdmin.fonte_rodape ? siteAdmin.fonte_menu : siteAdmin.fonte_rodape }">
 				</div>
 			</div>
@@ -105,7 +105,7 @@
 					<h4>Código Hexadecimal:</h4>
 					<input type="text" id="input_hex_back2"
 						class="col-sm-3 form-control" style="text-align: center;"
-						readonly="readonly"
+						onblur="atualizaBack(this,cor_resultante_2)"
 						value="${empty siteAdmin.back_rodape2 ? '#000000' : siteAdmin.back_rodape2}"
 						name="backColor2">
 				</div>
@@ -124,7 +124,7 @@
 					<h4>Código Hexadecimal:</h4>
 					<input type="text" id="input_hex_fonte2"
 						class="col-sm-3 form-control" style="text-align: center;"
-						readonly="readonly" name="fontColor2"
+						onblur="atualizaFonte(this,cor_resultante_2)" name="fontColor2"
 						value="${empty siteAdmin.fonte_rodape2 ? '#ffffff' : siteAdmin.fonte_rodape2}">
 				</div>
 			</div>
