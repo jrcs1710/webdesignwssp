@@ -29,8 +29,8 @@
 			<div class="container-fluid">
 
 				<ul class="nav navbar-nav">
-					<li><a href="#">Lista</a></li>
-					<li><a href="#">Novo Site</a></li>
+					<li><a href="admin">Lista</a></li>
+					<li><a href="novo">Novo Site</a></li>
 				</ul>
 			</div>
 		</nav>

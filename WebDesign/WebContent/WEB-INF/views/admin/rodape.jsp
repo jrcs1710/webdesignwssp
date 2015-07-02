@@ -98,12 +98,12 @@
 				<div class="col-sm-3" style="text-align: center;">
 					<h4>Selecione:</h4>
 					<input type="color" class="col-md-3 form-control"
-						onchange="colorBackClick2(this,input_hex_back)">
+						onchange="colorBackClick2(this,input_hex_back2)">
 
 				</div>
 				<div class="col-sm-3">
 					<h4>Código Hexadecimal:</h4>
-					<input type="text" id="input_hex_back"
+					<input type="text" id="input_hex_back2"
 						class="col-sm-3 form-control" style="text-align: center;"
 						readonly="readonly"
 						value="${empty siteAdmin.back_rodape2 ? '#000000' : siteAdmin.back_rodape2}"
@@ -117,12 +117,12 @@
 				<div class="col-sm-3" style="text-align: center;">
 					<h4>Selecione:</h4>
 					<input type="color" class="col-md-3 form-control"
-						onchange="colorFonteClick2(this,input_hex_fonte)">
+						onchange="colorFonteClick2(this,input_hex_fonte2)">
 
 				</div>
 				<div class="col-sm-3">
 					<h4>Código Hexadecimal:</h4>
-					<input type="text" id="input_hex_fonte"
+					<input type="text" id="input_hex_fonte2"
 						class="col-sm-3 form-control" style="text-align: center;"
 						readonly="readonly" name="fontColor2"
 						value="${empty siteAdmin.fonte_rodape2 ? '#ffffff' : siteAdmin.fonte_rodape2}">
@@ -131,7 +131,7 @@
 			<div class="form-group">
 				<label class="control-label col-sm-3">Preview:</label>
 				<div class="col-sm-6" id="cor_resultante_2"
-					style="background-color:${empty siteAdmin.back_menu ? '#000000' : siteAdmin.back_menu};color: ${empty siteAdmin.fonte_menu ? '#ffffff' : siteAdmin.fonte_menu};">
+					style="background-color:${empty siteAdmin.back_rodape2 ? '#000000' : siteAdmin.back_rodape2};color: ${empty siteAdmin.fonte_rodape2? '#ffffff' : siteAdmin.fonte_rodape2};">
 					<h2>Texto</h2>
 				</div>
 			</div>

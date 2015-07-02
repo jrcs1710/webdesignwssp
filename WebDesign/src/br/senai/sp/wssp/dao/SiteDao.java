@@ -54,7 +54,7 @@ public class SiteDao {
 	}
 
 	public void atualizaSite(Site site) {
-		String sql = "UPDATE site SET tiulo = ?, layout = ?, logo = ? WHERE id = ?";
+		String sql = "UPDATE site SET titulo = ?, layout = ?, logo = ? WHERE id = ?";
 		try {
 			PreparedStatement stmt = conexao.prepareStatement(sql);
 			stmt.setString(1, site.getTitulo());
@@ -89,7 +89,7 @@ public class SiteDao {
 			PreparedStatement stmt = conexao.prepareStatement(sql);
 			stmt.setString(1, titulo);
 			ResultSet rs = stmt.executeQuery();
-			if (rs.next()) {				
+			if (rs.next()) {
 				site = new Site();
 				site.setId(rs.getInt("id"));
 				site.setTitulo(rs.getString("titulo"));
@@ -127,6 +127,74 @@ public class SiteDao {
 			throw new RuntimeException(e);
 		}
 		return site;
+	}
+	
+	public Site buscar(int id) {
+		Site site = null;
+		String sql = "SELECT * FROM view_site WHERE id = ?";
+		try {
+			PreparedStatement stmt = conexao.prepareStatement(sql);
+			stmt.setInt(1, id);
+			ResultSet rs = stmt.executeQuery();
+			if (rs.next()) {
+				site = new Site();
+				site.setId(rs.getInt("id"));
+				site.setTitulo(rs.getString("titulo"));
+				site.setLayout(rs.getByte("layout"));
+				site.setLogo(rs.getString("logo"));
+				site.setBack_menu(rs.getString("back_menu"));
+				site.setFonte_menu(rs.getString("fonte_menu"));
+				site.setBack_rodape(rs.getString("back_rodape"));
+				site.setFonte_rodape(rs.getString("fonte_rodape"));
+				site.setFoto_empresa(rs.getString("foto_empresa"));
+				site.setFoto_produto(rs.getString("foto_produto"));
+				site.setFoto_cliente(rs.getString("foto_cliente"));
+				site.setFonte_chamada(rs.getString("fonte_chamada"));
+				site.setBack_chamada(rs.getString("back_chamada"));
+				site.setTelefone(rs.getString("telefone"));
+				site.setEmail(rs.getString("email"));
+				site.setBack_rodape2(rs.getString("back_rodape2"));
+				site.setFonte_rodape2(rs.getString("fonte_rodape2"));
+				String caminho = rs.getString("caminho");
+				if (caminho != null) {
+					site.setFotos_slide(new ArrayList<FotoSlide>());
+					FotoSlide fs = new FotoSlide();
+					fs.setId(rs.getInt("id_foto"));
+					fs.setCaminho(caminho);
+					site.getFotos_slide().add(fs);
+					while (rs.next()) {
+						fs = new FotoSlide();
+						fs.setId(rs.getInt("id_foto"));
+						fs.setCaminho(rs.getString("caminho"));
+						site.getFotos_slide().add(fs);
+					}
+				}
+			}
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+		return site;
+	}
+
+	public List<Site> listar() {
+		List<Site> lista = new ArrayList<Site>();
+		String sql = "SELECT * FROM site ORDER BY ID DESC LIMIT 30";
+		try {
+			PreparedStatement stmt = conexao.prepareStatement(sql);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				Site site = new Site();
+				site.setId(rs.getInt("id"));
+				site.setTitulo(rs.getString("titulo"));
+				site.setLayout(rs.getByte("layout"));
+				site.setBack_menu(rs.getString("back_menu"));
+				site.setFonte_menu(rs.getString("fonte_menu"));
+				lista.add(site);
+			}
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+		return lista;
 	}
 
 	public void salvarSlide(List<String> imagens, Site site) {
@@ -242,7 +310,7 @@ public class SiteDao {
 		}
 		return lista;
 	}
-	
+
 	public List<Produto> buscarProdutosDestaque(int idSite) {
 		List<Produto> lista = new ArrayList<Produto>();
 		String sql = "SELECT * FROM produto WHERE id_site = ? AND destaque = ? ORDER BY ID DESC LIMIT 4";
@@ -295,5 +363,35 @@ public class SiteDao {
 			throw new RuntimeException(e);
 		}
 		return retorno;
+	}
+
+	public void defineRodape(Site site) {
+		String sql = "UPDATE site SET back_rodape = ?, fonte_rodape = ?, back_rodape2 = ?, fonte_rodape2 = ?, telefone = ?, email = ? WHERE id = ?";
+		try {
+			PreparedStatement stmt = conexao.prepareStatement(sql);
+			stmt.setString(1, site.getBack_rodape());
+			stmt.setString(2, site.getFonte_rodape());
+			stmt.setString(3, site.getBack_rodape2());
+			stmt.setString(4, site.getFonte_rodape2());
+			stmt.setString(5, site.getTelefone());
+			stmt.setString(6, site.getEmail());
+			stmt.setInt(7, site.getId());
+			stmt.execute();
+			stmt.close();
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	public void excluirSite(int id){
+		String sql = "DELETE FROM site WHERE id = ?";
+		try {
+			PreparedStatement stmt = conexao.prepareStatement(sql);
+			stmt.setInt(1, id);
+			stmt.execute();
+			stmt.close();
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 }

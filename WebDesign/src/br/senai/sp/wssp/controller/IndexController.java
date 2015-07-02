@@ -26,13 +26,23 @@ public class IndexController {
 		if (site != null) {
 			List<Produto> produtos = dao.buscarProdutosDestaque(site.getId());
 			model.addAttribute("produtosDestaque", produtos);
-		}		
+		}
 		session.setAttribute("site", site);
-		
+
 		if (site != null && site.getLayout() == 2) {
 			return "layout2/index";
 		} else {
 			return "layout1/index";
+		}
+	}
+
+	@RequestMapping("clientes")
+	public String clientes(HttpSession session) {
+		Site site = (Site) session.getAttribute("site");
+		if (site != null && site.getLayout() == 2) {
+			return "layout2/clientes";
+		} else {
+			return "layout1/clientes";
 		}
 	}
 }

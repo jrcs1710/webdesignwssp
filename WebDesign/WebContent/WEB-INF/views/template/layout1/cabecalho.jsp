@@ -47,11 +47,11 @@
 			<div class="container-fluid">
 
 				<ul class="nav navbar-nav">
-					<li><a href="#">Home</a></li>
-					<li><a href="#">Empresa</a></li>
-					<li><a href="#">Produtos</a></li>
-					<li><a href="#">Localização</a></li>
-					<li><a href="#">Clientes</a></li>
+					<li><a href=<c:url value="/index/${site.titulo }"/>>Home</a></li>
+					<li><a href=<c:url value="/empresa"/>>Empresa</a></li>
+					<li><a href=<c:url value="/produtos"/>>Produtos</a></li>
+					<li><a href=<c:url value="/localizacao"/>>Localização</a></li>
+					<li><a href=<c:url value="/clientes"/>>Clientes</a></li>
 
 				</ul>
 				<ul class="nav navbar-nav navbar-right">

@@ -11,6 +11,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -79,7 +80,6 @@ public class SiteController implements ServletContextAware {
 	@Override
 	public void setServletContext(ServletContext context) {
 		this.servletContext = context;
-
 	}
 
 	@RequestMapping("uploadSlide")
@@ -161,16 +161,16 @@ public class SiteController implements ServletContextAware {
 	@RequestMapping("defineRodape")
 	public String defineRodape(String backColor, String fontColor,
 			String backColor2, String fontColor2, String telefone,
-			String email, int id, HttpSession session,
-			@RequestParam("imagens") MultipartFile[] imagens) {
+			String email, int id, HttpSession session) {
 		Site siteAdmin = (Site) session.getAttribute("siteAdmin");
-
 		siteAdmin.setBack_rodape(backColor);
 		siteAdmin.setFonte_rodape(fontColor);
 		siteAdmin.setBack_rodape2(backColor2);
 		siteAdmin.setFonte_rodape2(fontColor2);
-
-		return "forward:cadprodutos";
+		siteAdmin.setTelefone(telefone);
+		siteAdmin.setEmail(email);
+		dao.defineRodape(siteAdmin);
+		return "forward:admin";
 	}
 
 	@RequestMapping(value = "cadastraProduto")
@@ -205,8 +205,7 @@ public class SiteController implements ServletContextAware {
 	}
 
 	@RequestMapping("excluirProduto")
-	public void excluirProduto(Integer idProduto, HttpServletResponse response) {
-		System.out.println(idProduto);
+	public void excluirProduto(Integer idProduto, HttpServletResponse response) {		
 		String caminho = dao.buscarCaminhoProduto(idProduto);
 
 		try {
@@ -215,6 +214,21 @@ public class SiteController implements ServletContextAware {
 				arquivo.delete();
 			}
 			dao.excluirProduto(idProduto);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+		response.setStatus(200);
+	}
+	
+	@RequestMapping("excluirSite")
+	public void excluirSite(int id, String titulo, HttpServletResponse response){
+		String path = "/imagens/" +titulo;
+		try {
+			File pasta = new File(servletContext.getRealPath(path));
+			if (pasta.exists()) {				
+				FileUtils.deleteDirectory(pasta);
+			}
+			dao.excluirSite(id);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}

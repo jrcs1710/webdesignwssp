@@ -1,5 +1,7 @@
 package br.senai.sp.wssp.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +18,10 @@ public class AdminController {
 	private SiteDao dao;
 
 	@RequestMapping("admin")
-	public String admin() {
+	public String admin(Model model, HttpSession session) {
+		session.invalidate();
+		List<Site> sites = dao.listar();
+		model.addAttribute("listaSites", sites);
 		return "admin/admin";
 	}
 
@@ -56,6 +61,13 @@ public class AdminController {
 			model.addAttribute("produtos", dao.buscarProdutos(siteAdmin.getId()));
 		}
 		return "admin/cadproduto";
+	}
+	
+	@RequestMapping("alterarSite")
+	public String alterarSite(int id, HttpSession session){
+		Site site =  dao.buscar(id);
+		session.setAttribute("siteAdmin", site);
+		return "admin/novo";
 	}
 
 }
