@@ -55,9 +55,9 @@
 
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#"><span class="icon icon-facebook2"></span></a></li>
-					<li><a href="#"><span class="icon icon-instagram"></span></a></li>
-					<li><a href="#"><span class="icon icon-twitter2"></span></a></li>
+					<li><a href="javascript: void(0);" onclick="window.open('http://www.facebook.com/sharer.php?u=http://www.worldskillssaopaulo2015.com/pt/','ventanacompartir', 'toolbar=0, status=0, width=600, height=450');"><span class="icon icon-facebook2"></span></a></li>
+					<li><a href="https://instagram.com/worldskills/"><span class="icon icon-instagram"></span></a></li>
+					<li><a href="javascript: void(0);" onclick="window.open('https://twitter.com/intent/tweet?original_referer=http://http://www.worldskillssaopaulo2015.com/pt/&source=tweetbutton&text=World Skills SP 2015&url=http://www.worldskillssaopaulo2015.com/pt/','ventanacompartir', 'toolbar=0, status=0, width=600, height=450');"><span class="icon icon-twitter2"></span></a></li>
 				</ul>
 
 			</div>

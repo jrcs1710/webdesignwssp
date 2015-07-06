@@ -6,7 +6,7 @@
 <div class="col-md-9">
 	<h3 style="color:${site.back_chamada}">Nossos produtos</h3>
 	<div class="row">
-		<c:if test="${produtosSite.size() == 0 }">
+		<c:if test="${produtosSite.size() == null || produtosSite.size() <= 0 }">
 			<c:forEach var="i" begin="1" end="9" step="1">
 				<div class="col-sm-4">
 					<figure style="margin-top: 10px;">

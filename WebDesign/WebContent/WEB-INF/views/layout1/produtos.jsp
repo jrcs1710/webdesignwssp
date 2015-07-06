@@ -6,7 +6,7 @@
 
 <h3 style="color:${site.back_chamada}">Nossos produtos</h3>
 <div class="row">
-	<c:if test="${produtosSite == null }">
+	<c:if test="${produtosSite == null || produtosSite.size() <= 0 }">
 		<c:forEach var="i" begin="1" end="12" step="1">
 			<div class="col-sm-3">
 				<figure style="margin-top: 10px;">
@@ -21,7 +21,7 @@
 		</c:forEach>
 	</c:if>
 
-	<c:if test="${produtosSite != null }">
+	<c:if test="${produtosSite.size() > 0}">
 		<c:forEach items="${produtosSite }" var="produto">
 			<div class="col-sm-3">
 				<figure style="margin-top: 10px;">

@@ -22,12 +22,16 @@
 </head>
 <style>
 .navbar-inverse .nav-pills li a {
-	color:  ${site.fonte_menu};
-}
-.page-header span {
-	color:  ${site.back_menu};
+	color: ${site.fonte_menu
 }
 
+;
+}
+.page-header span {
+	color: ${site.back_menu
+}
+;
+}
 </style>
 
 <body>
@@ -36,7 +40,8 @@
 			<c:choose>
 				<c:when test="${empty site }">
 					<img class="logo" style="margin-left: 14px;"
-						alt="Logomarca empresa" src=<c:url value="/resources/imagens/logo.png"/>>
+						alt="Logomarca empresa"
+						src=<c:url value="/resources/imagens/logo.png"/>>
 				</c:when>
 				<c:otherwise>
 					<img class="logo" style="margin-left: 14px;"
@@ -44,18 +49,24 @@
 				</c:otherwise>
 			</c:choose>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#"><span class="icon icon-facebook2"></span></a></li>
-				<li><a href="#"><span class="icon icon-instagram"></span></a></li>
-				<li><a href="#"><span class="icon icon-twitter2"></span></a></li>
+				<li><a href="javascript: void(0);"
+					onclick="window.open('http://www.facebook.com/sharer.php?u=http://www.worldskillssaopaulo2015.com/pt/','ventanacompartir', 'toolbar=0, status=0, width=600, height=450');"><span
+						class="icon icon-facebook2"></span></a></li>
+				<li><a href="https://instagram.com/worldskills/"><span
+						class="icon icon-instagram"></span></a></li>
+				<li><a href="javascript: void(0);"
+					onclick="window.open('https://twitter.com/intent/tweet?original_referer=http://http://www.worldskillssaopaulo2015.com/pt/&source=tweetbutton&text=World Skills SP 2015&url=http://www.worldskillssaopaulo2015.com/pt/','ventanacompartir', 'toolbar=0, status=0, width=600, height=450');"><span
+						class="icon icon-twitter2"></span></a></li>
 			</ul>
 		</header>
 		<div class="col-md-3">
-			<nav class="navbar navbar-inverse" style="background-color:${site.back_menu};">
+			<nav class="navbar navbar-inverse"
+				style="background-color:${site.back_menu};">
 
 
-				<ul class="nav nav-pills nav-stacked"
-					>
-					<li><a href=<c:url value="/index/${site == null ? titulo : site.titulo }"/>>Home</a></li>
+				<ul class="nav nav-pills nav-stacked">
+					<li><a
+						href=<c:url value="/index/${site == null ? titulo : site.titulo }"/>>Home</a></li>
 					<li><a href=<c:url value="/empresa"/>>Empresa</a></li>
 					<li><a href=<c:url value="/produtos"/>>Produtos</a></li>
 					<li><a href=<c:url value="/localizacao"/>>Localização</a></li>
